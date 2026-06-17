@@ -4,6 +4,7 @@ using System.Collections;
 
 public class DataReporter : MonoBehaviour
 {
+    // URL Google Form resmi milik SMKN 1 Gala untuk Game Kakao
     private string urlGoogleForm = "https://google.com";
 
     public void KirimRaporSiswa(string nama, string kelas, int m1, int m2, int m3, int m4m5)
@@ -14,19 +15,25 @@ public class DataReporter : MonoBehaviour
     IEnumerator PostDataDataCoroutine(string nama, string kelas, int m1, int m2, int m3, int m4m5)
     {
         WWWForm form = new WWWForm();
-        form.AddField("entry.111111111", nama);
-        form.AddField("entry.222222222", kelas);
-        form.AddField("entry.333333333", m1.ToString());
-        form.AddField("entry.444444444", m2.ToString());
-        form.AddField("entry.555555555", m3.ToString());
-        form.AddField("entry.666666666", m4m5.ToString());
+        
+        // Memasukkan data nilai berdasarkan Entry ID formulir asli sekolah
+        form.AddField("entry.1728471651", nama);
+        form.AddField("entry.1400541689", kelas);
+        form.AddField("entry.157723933", m1.ToString());
+        form.AddField("entry.295601409", m2.ToString());
+        form.AddField("entry.1930607411", m3.ToString());
+        form.AddField("entry.298113225", m4m5.ToString());
 
         using (UnityWebRequest www = UnityWebRequest.Post(urlGoogleForm, form))
         {
             yield return www.SendWebRequest();
             if (www.result == UnityWebRequest.Result.Success)
             {
-                Debug.Log("Rapor praktikum siswa berhasil dikirim ke Guru Pengawas!");
+                Debug.Log("Rapor praktikum siswa SMKN 1 Gala berhasil dikirim ke Google Form!");
+            }
+            else
+            {
+                Debug.LogError("Gagal mengirim nilai: " + www.error);
             }
         }
     }
