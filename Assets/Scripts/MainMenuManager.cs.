@@ -1,0 +1,42 @@
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class MainMenuManager : MonoBehaviour
+{
+    public GameObject panelMainMenu;
+    public GameObject panelPilihModul;
+
+    void Start()
+    {
+        panelMainMenu.SetActive(true);
+        panelPilihModul.SetActive(false);
+    }
+
+    public void BukaPilihanModul()
+    {
+        panelMainMenu.SetActive(false);
+        panelPilihModul.SetActive(true);
+    }
+
+    public void KembaliKeMainMenu()
+    {
+        panelMainMenu.SetActive(true);
+        panelPilihModul.SetActive(false);
+    }
+
+    public void MasukKeModul(string namaSceneModul)
+    {
+        SceneManager.LoadScene(namaSceneModul);
+    }
+
+    public void BukaEnsiklopedia()
+    {
+        SceneManager.LoadScene("Scene_Ensiklopedia");
+    }
+
+    public void KeluarGame()
+    {
+        Debug.Log("Siswa keluar dari game.");
+        Application.Quit();
+    }
+}
